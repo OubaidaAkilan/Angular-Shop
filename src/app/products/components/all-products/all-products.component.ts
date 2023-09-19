@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
-import { Product } from 'src/app/shared/models/product.model';
+import { Product } from 'src/app/shared/models/product';
 import { Subscription } from 'rxjs';
 import { CartsService } from 'src/app/carts/services/carts.service';
-import { Cart } from 'src/app/shared/models/cart.model';
+import { Cart } from 'src/app/shared/models/cart';
 
 @Component({
   selector: 'app-all-products',

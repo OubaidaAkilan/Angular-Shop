@@ -7,10 +7,18 @@ import { SharedModule } from './shared/shared.module';
 import { RoutingModule } from './app-routing.module';
 import { ProductsModule } from './products/products.module';
 import { CartsService } from './carts/services/carts.service';
+import { CartsModule } from './carts/carts.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, SharedModule, RoutingModule, ProductsModule],
+  imports: [
+    BrowserModule,
+    SharedModule,
+    RoutingModule,
+    ProductsModule,
+    CartsModule,
+    
+  ],
   providers: [CartsService],
   bootstrap: [AppComponent],
 })

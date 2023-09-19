@@ -1,8 +1,10 @@
-<div class="item" [routerLink]="['/products' ,data.id]">
-  <img src="{{ data.image }}" alt="" />
-  <div class="body">
-    <h4>{{ data.title }}</h4>
-    <p>{{ data.description }}</p>
+<div class="item">
+  <div [routerLink]="['/products', data.id]">
+    <img src="{{ data.image }}" alt="" />
+    <div class="body">
+      <h4>{{ data.title }}</h4>
+      <p>{{ data.description }}</p>
+    </div>
   </div>
   <div class="px-3 mb-2 d-flex justify-content-between align-items-center">
     <button
@@ -14,7 +16,12 @@
     </button>
     <ng-template #increaseQuantity>
       <div class="px-3 mb-2 d-flex justify-content-between align-items-center">
-        <input type="number" [(ngModel)]="quantity" class="form-control" />
+        <input
+          min="1"
+          type="number"
+          [(ngModel)]="quantity"
+          class="form-control"
+        />
         <button
           class="btn btn-primary"
           (click)="onEditTheQuantityOfProductWithinTheCart(data.id)"

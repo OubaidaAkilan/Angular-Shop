@@ -1,1 +1,84 @@
-<p>cart works!</p>
+<div class="cartBox">
+  <h1 class="text-danger">Shopping Cart</h1>
+  <div class="headCart">
+    <p class="lead">
+      You have <label for="" class="text-danger">{{ cart.length }}</label> item
+      in your list
+    </p>
+    <span class="text-danger card-header" (click)="clearTheProductsFromCart()"
+      >Clear Shopping Cart</span
+    >
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Price</th>
+        <th style="width: 25%">Quantity</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cart; let idx = index">
+        <td><img src="{{ item.product.image }}" alt="product-image" /></td>
+        <td>{{ item.product.title }}</td>
+        <td>{{ item.product.price }} L.E</td>
+        <td>
+          <div class="quantity">
+            <button class="btn btn-dark" (click)="increaseTheQuantity(idx)">
+              +
+            </button>
+            <input
+              min="1"
+              type="number"
+              class="form-control"
+              [(ngModel)]="item.quantity"
+              (change)="detectChange()"
+            />
+            <button class="btn btn-dark" (click)="decreaseTheQuantity(idx)">
+              -
+            </button>
+          </div>
+        </td>
+        <td>{{ item.product.price * item.quantity }} L.E</td>
+        <td>
+          <button
+            (click)="deleteTheProductFromCart(idx)"
+            class="btn btn-danger"
+          >
+            -
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Total : {{ total }}</th>
+        <th>
+          <button
+            class="btn btn-success"
+            *ngIf="!isLoading; else spinner"
+            (click)="submitTheCart()"
+          >
+            Order Now
+          </button>
+          <!-- ====> Start Spinner -->
+          <ng-template #spinner>
+            <div class="w-100 text-center">
+              <app-spinner></app-spinner>
+            </div>
+          </ng-template>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+<div class="alert alert-success" role="alert" *ngIf="succsess">
+  <strong>Well done!</strong>Your Order has been sent
+</div>
