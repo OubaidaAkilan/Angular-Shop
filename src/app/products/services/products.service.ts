@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Product } from 'src/app/shared/models/product.model';
 
 import { environment } from 'src/environments/evnironment';
 
@@ -19,6 +20,10 @@ export class ProductsService {
       );
     }
     return this.http.get(environment.baseFakeStoreAPI + '/products');
+  }
+
+  getProductById(id: number): any {
+    return this.http.get(environment.baseFakeStoreAPI + '/products/' + id);
   }
 
   getCategories(): any {

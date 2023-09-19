@@ -1,0 +1,16 @@
+<label for="" class="my-1">{{ title }}</label>
+<select
+  name="selectCategory"
+  id=""
+  class="form-control"
+  (change)="onChangeHandle($event)"
+>
+  <option value="all">all</option>
+  <option
+    *ngFor="let item of data; let idx = index"
+    value="{{ item }}"
+    [selected]="item === optionSelected"
+  >
+    {{ item }}
+  </option>
+</select>
