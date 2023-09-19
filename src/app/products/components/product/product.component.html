@@ -1,0 +1,28 @@
+<div class="item" [routerLink]="['/products' ,data.id]">
+  <img src="{{ data.image }}" alt="" />
+  <div class="body">
+    <h4>{{ data.title }}</h4>
+    <p>{{ data.description }}</p>
+  </div>
+  <div class="px-3 mb-2 d-flex justify-content-between align-items-center">
+    <button
+      class="btn btn-success"
+      (click)="onAddToCartHandle()"
+      *ngIf="!cartStatus; else increaseQuantity"
+    >
+      Add To Cart
+    </button>
+    <ng-template #increaseQuantity>
+      <div class="px-3 mb-2 d-flex justify-content-between align-items-center">
+        <input type="number" [(ngModel)]="quantity" class="form-control" />
+        <button
+          class="btn btn-primary"
+          (click)="onEditTheQuantityOfProductWithinTheCart(data.id)"
+        >
+          Edit
+        </button>
+      </div>
+    </ng-template>
+    <span>{{ data.price }}L.E</span>
+  </div>
+</div>

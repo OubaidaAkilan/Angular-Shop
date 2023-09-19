@@ -11,7 +11,7 @@ const appRoutes: Routes = [
     component: AllProductsComponent,
   },
   {
-    path: 'details',
+    path: 'products/:id',
     component: DetailsProductsComponent,
   },
   {
@@ -28,6 +28,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [],
   imports: [CommonModule, RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule],
+  exports:[RouterModule]
 })
 export class RoutingModule {}
