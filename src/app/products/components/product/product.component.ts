@@ -1,15 +1,7 @@
-import {
-  AfterViewChecked,
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { Product } from 'src/app/shared/models/product.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Product } from 'src/app/shared/models/product';
 import { CartsService } from 'src/app/carts/services/carts.service';
-import { Cart } from 'src/app/shared/models/cart.model';
+import { Cart } from 'src/app/shared/models/cart';
 
 @Component({
   selector: 'app-product',
@@ -30,8 +22,13 @@ export class ProductComponent implements OnInit {
   constructor(private cartServices: CartsService) {}
 
   ngOnInit(): void {
-    this.cart = this.cartServices.getCart();
-    this.checkTheProductWithinTheCart();
+    if ('cart' in localStorage) {
+      this.cart = this.cartServices.getCart();
+
+      this.checkTheProductWithinTheCart();
+    } else {
+      this.cart = this.cartServices.getCart();
+    }
   }
 
   checkTheProductWithinTheCart(): void {
@@ -45,7 +42,7 @@ export class ProductComponent implements OnInit {
     });
   }
   onAddToCartHandle(): void {
-    this.quantity =1
+    this.quantity = 1;
     let event = {
       product: this.data,
       quantity: this.quantity,

@@ -1,6 +1,7 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Cart } from 'src/app/shared/models/cart.model';
-import { Product } from 'src/app/shared/models/product.model';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Cart } from 'src/app/shared/models/cart';
+import { environment } from 'src/environments/evnironment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { Product } from 'src/app/shared/models/product.model';
 export class CartsService {
   private cart: Cart[] = [];
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.getCartFromLocalStorage();
   }
 
@@ -18,6 +19,7 @@ export class CartsService {
 
   setCartToLocalStorage(arrOfCart: Cart[]): void {
     localStorage.setItem('cart', JSON.stringify(arrOfCart));
+    this.getCartFromLocalStorage();
   }
 
   getCart(): any {
@@ -26,5 +28,9 @@ export class CartsService {
 
   insertToCart(data: any): void {
     this.cart.push(data);
+  }
+
+  submitTheCartToBackend(model: any): any {
+    return this.http.post(environment.baseFakeStoreAPI + '/carts', model);
   }
 }
